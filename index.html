@@ -1,5 +1,5 @@
-<DOCTYPE = !DOCTYPE html>
-<html>
+<DOCTYPE html>
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,27 +10,32 @@
         <!-- Latest compiled and minified CSS -->
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
-        <!-- The Hangman Game JavaScript -->
-        <script src="assets/javascript/app.js"></script>
-    
+       
        <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     </head>
     <body>
+        <div id=container>
             <header></header>
                 <main>
+                    <!-- Topics buttons get added here -->
                     <div id="topic-buttons">
                     </div>
 
+                    <!-- Form supporting addition of new topics -->
                     <form id="topic-form">
                         <label for="topic-input">Add a topic</label>
                         <input type="text"   id="topic-input"><br>
                         <input type="submit" id="add-topic" value="Submit">
                     </form>
 
-                    <div id="topics">
+                    <!-- Topic images get added here -->
+                    <div id="topic-images">
                     </div>
                 </main>
             <footer></footer>
+
+            <!-- The GIF Tastic JavaScript -->
+            <script src="assets/javascript/app.js"></script>
+        </div>
     </body>
 </html>
