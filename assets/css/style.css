@@ -97,8 +97,9 @@ figure {
      margin: 5px;
 }
 
- #topic-title {
-    color: whitesmoke;
+ .topic-title {
+    color: darkslategrey;
+    margin: 2px;
 }
 
 #powered-by {

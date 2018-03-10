@@ -22,6 +22,7 @@ function getTopicImages() {
     {
         // Clear the images out
         $("#topic-images").empty();
+        $("image-instructions").hide();  // Hide this msg while there are no images
 
         // Log the response data fro debugging
         console.log(response);
@@ -123,13 +124,15 @@ function topicImage(id,title,still,movie,height,width,rating,animate)
         // Create the figure caption
         var capt = $("<figcaption>");
         capt.addClass("topic-title");
-        capt.text(this.title);
+        let seperator = (this.title != "" ? ' - ' :'');
+        capt.text(this.title + seperator + "rated " + this.rating);
 
         // Add the caption to the figure
         fig.append(capt);
   
         // Add the figure to the HTML
         $("#topic-images").append(fig);
+        $("image-instructions").show();  // show this msg when there is at least one images
     };
 
 }
