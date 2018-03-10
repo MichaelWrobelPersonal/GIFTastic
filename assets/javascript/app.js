@@ -5,6 +5,7 @@
 // Initial array of topics
 var topics = ["News", "Space", "Sports", "Sailing", "Camping"];
 
+
 // Get images for the Topic method
 function getTopicImages() {
 
@@ -29,7 +30,7 @@ function getTopicImages() {
         {
              console.log("For Item: " + i);
              console.log("Title: " + response.data[i].title);
-             console.log("Rateing: " + response.data[i].rating);
+             console.log("Rating: " + response.data[i].rating);
              console.log("Source: " + response.data[i].source);
              console.log("Image url: " + response.data[i].images.fixed_width.url);
              console.log("Image size: " + response.data[i].images.fixed_width.size);
@@ -37,17 +38,22 @@ function getTopicImages() {
              console.log("Movie size: " + response.data[i].images.fixed_width.mp4_size);
              console.log("Image Heigth: " + response.data[i].images.fixed_width.height);
              console.log("Image Width: " + response.data[i].images.fixed_width.width);
-        
-            // Render images from the recieved data
+
+            // Render images from the received data
             let topicInfo = new topicImage(
                 "topic-image-"+i,
                 response.data[i].title,
                 response.data[i].images.fixed_width.url,
                 response.data[i].images.fixed_width.mp4,
                 response.data[i].images.fixed_width.height,
-                response.data[i].images.fixed_width.width
+                response.data[i].images.fixed_width.width,
+                response.data[i].rating
             );
-            topicInfo.renderImg();
+            // Only render 'G' rated images
+            if (response.data[i].rating === 'g')
+                topicInfo.renderImg();
+            else
+              console.log(response.data[i].title + "is rated " + response.data[i].rating);
         }
     });
 }
@@ -57,6 +63,8 @@ function renderButtons() {
 
     // Delete existing topics prior to adding new ones from the topics array
     $("#topic-buttons").empty();
+    // Hide the image instructions as well
+    $('image-instructions').fadeOut();
 
     // Loop through array of topics
     for (var i = 0; i < topics.length; i++) {
@@ -74,7 +82,7 @@ function renderButtons() {
     }
 }
 
-function topicImage(id,title,still,movie,height,width,animate)
+function topicImage(id,title,still,movie,height,width,rating,animate)
 {
     this.id = id;
     this.title = title;
@@ -83,9 +91,13 @@ function topicImage(id,title,still,movie,height,width,animate)
     this.movie = movie;
     this.width = width;
     this.height = height;
+    this.rating = rating;
     this.animate = false;
     this.renderImg = function() {
-    
+
+    // create the figure
+    var fig = $("<figure>");
+    // create the image
     var elem = $("<img>");
         // Adding an ID
         elem.attr("Id", id);
@@ -99,34 +111,27 @@ function topicImage(id,title,still,movie,height,width,animate)
         console.log(this.photo);
         // Alternate text is the title
         elem.attr("alt", this.title);
+        elem.attr("title", this.title);
 
         // Set the hieght and width
         elem.attr("height", this.height );
         elem.attr("width", this.width );
 
-        // Added the image to the HTML
-        $("#topic-images").append(elem);
+        // Add the image to the figure
+        fig.append(elem);
+
+        // Create the figure caption
+        var capt = $("<figcaption>");
+        capt.addClass("topic-title");
+        capt.text(this.title);
+
+        // Add the caption to the figure
+        fig.append(capt);
+  
+        // Add the figure to the HTML
+        $("#topic-images").append(fig);
     };
 
-    this.chooseImage = function() {
-        $(id).attr('src', this.image);
-    };
-    this.chooseMovie = function() {
-        $(id).attr('src', this.movie);
-    };
-
-    this.toggleImg = function() {
-        if(!this.animate)
-        {
-            $(id).attr('src', this.image);
-            this.animate = true;
-        }
-        else
-        {
-            $(id).attr('src', this.photo);
-            this.animate = false;
-        }
-    }
 }
 
 // Add Topic Handler
@@ -141,6 +146,7 @@ $("#add-topic").on("click", function (event) {
 
     // Call button rendiring
     renderButtons();
+    $('image-instructions').fadeIn();
 });
 
 // Function for displaying the topic images
