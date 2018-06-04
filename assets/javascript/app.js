@@ -24,7 +24,7 @@ function getTopicImages() {
         $("#topic-images").empty();
         $("image-instructions").hide();  // Hide this msg while there are no images
 
-        // Log the response data fro debugging
+        // Log the response data for debugging
         console.log(response);
         console.log("Item Count: " + response.data.length);
         for (var i=0; i< response.data.length;i++)
