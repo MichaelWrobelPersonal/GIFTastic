@@ -7,6 +7,10 @@ A dynamic site that utilizes AJAX and the GIPHY API to display GIFs of various t
 # Deployed site
 [GifTastic](https://michaelwrobelpersonal.github.io/GIFTastic/)
 
+# Author
+
+Michael Wrobel
+
 # Technology Details
 
 The site utilizes the GIPHI API to pull up ten sample images based on some default topics and supports adding additional topics.   Pictures are displayed as still images and upon clicking them they are animated.  This is accomplished by switching between two different GIF images one of which is a still image and the other which has an animation embedded in it.
